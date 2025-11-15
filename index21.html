@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manmohak Prusty | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-soft: #0b1020;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.15);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --card: #0f172a;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.85);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1d2244, #020617 55%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 20px;
+      margin-bottom: 32px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      font-size: 0.95rem;
+    }
+
+    .logo-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #4f46e5, #22d3ee);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.6);
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--text);
+      background: rgba(148, 163, 184, 0.1);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2fr);
+      gap: 32px;
+      margin-top: 40px;
+      margin-bottom: 64px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.2rem, 3vw + 1rem, 3.4rem);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero-text h1 span {
+      background: linear-gradient(135deg, #4f46e5, #22d3ee);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-tagline {
+      color: var(--muted);
+      max-width: 480px;
+      font-size: 0.98rem;
+      margin-bottom: 20px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+      font-size: 0.8rem;
+    }
+
+    .pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .pill--accent {
+      border: none;
+      background: var(--accent-soft);
+      color: #c7d2fe;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #22d3ee);
+      color: white;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 1);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(30, 64, 175, 0.4);
+    }
+
+    .hero-visual {
+      background: radial-gradient(circle at 10% 0%, #4f46e5 0, transparent 55%),
+                  radial-gradient(circle at 90% 100%, #22d3ee 0, transparent 55%);
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card {
+      background: rgba(15, 23, 42, 0.92);
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .hero-highlight {
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(148, 163, 184, 0.4);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    section {
+      margin-bottom: 56px;
+    }
+
+    .section-heading {
+      margin-bottom: 16px;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #a5b4fc;
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 16px 16px 14px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(79, 70, 229, 0.25), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 55px rgba(15, 23, 42, 0.95);
+      border-color: rgba(129, 140, 248, 0.9);
+    }
+
+    .card-title {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .card-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .card-body {
+      font-size: 0.85rem;
+      color: #e5e7eb;
+      margin-bottom: 10px;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .link-inline {
+      font-size: 0.8rem;
+      text-decoration: none;
+      color: #c4b5fd;
+    }
+
+    .link-inline:hover {
+      text-decoration: underline;
+    }
+
+    .timeline {
+      border-left: 1px solid rgba(148, 163, 184, 0.5);
+      padding-left: 16px;
+      margin-top: 8px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -9px;
+      top: 3px;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #4f46e5;
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.4);
+    }
+
+    .timeline-role {
+      font-size: 0.9rem;
+    }
+
+    .timeline-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .contact {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      margin-top: 4px;
+      padding: 9px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
+      font-size: 0.85rem;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: 1px solid #4f46e5;
+      box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.7);
+    }
+
+    footer {
+      margin-top: 32px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header {
+        border-radius: 16px;
+      }
+      nav {
+        display: none;
+      }
+      .grid-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .contact {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo">
+        <div class="logo-badge">MP</div>
+        <span>Manmohak Prusty</span>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#process">Process</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div class="hero-text">
+          <h1>
+            Building secure <span>digital experiences</span> for the web & beyond.
+          </h1>
+          <p class="hero-tagline">
+            I’m a cybersecurity-minded developer who enjoys crafting clean UIs, secure backends
+            and practical tools — from WhatsApp chatbots for cyber crime reporting to
+            data-driven dashboards and quantum experiments.
+          </p>
+
+          <div class="hero-meta">
+            <span class="pill pill--accent">Available for Internship / Full-time</span>
+            <span class="pill">Cybersecurity · Web Dev · Data</span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">View Selected Work →</a>
+            <a href="https://drive.google.com/file/d/1eQ0AGx8T1RLw6UGspRhBUQVw2pADyYcI/view?usp=drivesdk" class="btn btn-ghost" target="_blank">
+              Download CV
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <!-- Mini dashboard snapshot (no photo/avatar) -->
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <div>
+                <strong>Portfolio Snapshot</strong>
+                <div style="font-size: 0.78rem; color: var(--muted);">
+                  Cybersecurity, chatbots & modern web.
+                </div>
+              </div>
+              <div class="status-dot"></div>
+            </div>
+
+            <div class="hero-tags">
+              <span class="tag">Cybersecurity</span>
+              <span class="tag">WhatsApp Bots</span>
+              <span class="tag">Web Apps</span>
+              <span class="tag">Data & Quantum</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; gap: 10px;">
+              <div>
+                <div style="font-size:0.76rem; color: var(--muted);">Projects</div>
+                <div style="font-size:1.1rem; font-weight:600;">5+</div>
+              </div>
+              <div>
+                <div style="font-size:0.76rem; color: var(--muted);">Focus</div>
+                <div style="font-size:0.9rem;">Secure, human-centered systems</div>
+              </div>
+              <div>
+                <div style="font-size:0.76rem; color: var(--muted);">Location</div>
+                <div style="font-size:0.9rem;">India · Remote</div>
+              </div>
+            </div>
+
+            <div class="hero-highlight">
+              “I love understanding threats deeply and then designing flows that keep users safe
+              while feeling simple to use.”
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="section-heading">
+          <div class="eyebrow">About</div>
+          <div class="section-title">Who I am</div>
+          <p class="section-subtitle">
+            A cybersecurity-driven developer blending security, UX, and engineering.
+          </p>
+        </div>
+        <p style="font-size:0.92rem; color:#e5e7eb; max-width:700px;">
+          I’m Manmohak Prusty, a B.Tech Computer Science Engineering student (2022–2026) with
+          a strong interest in cybersecurity and modern web development. I enjoy working on
+          projects where I can understand, detect, and counter cyber threats while still
+          delivering clean, user-friendly experiences.
+          <br><br>
+          From building a WhatsApp chatbot for the Cyber Crime Helpline (1930) to experimenting
+          with quantum algorithms like the Quantum Fourier Transform, I like exploring how
+          different technologies come together to solve real-world problems.
+        </p>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <div class="section-heading">
+          <div class="eyebrow">Skills</div>
+          <div class="section-title">What I work with</div>
+          <p class="section-subtitle">
+            Programming, cybersecurity, data & quantum — backed by hands-on projects.
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <div class="card-title">Programming & Web</div>
+            <div class="card-body">
+              C · Java · Python · JavaScript<br/>
+              HTML · CSS · MySQL<br/>
+              Linux & basic CLI workflows
+            </div>
+            <div class="card-tags">
+              <span class="tag">Problem Solving</span>
+              <span class="tag">Clean Code</span>
+              <span class="tag">Responsive UI</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Cybersecurity</div>
+            <div class="card-body">
+              Linux server management<br/>
+              Offensive & defensive security<br/>
+              Phishing strategies & threat intelligence
+            </div>
+            <div class="card-tags">
+              <span class="tag">Vulnerability Mgmt</span>
+              <span class="tag">Threat Intel</span>
+              <span class="tag">Security Mindset</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Data & Quantum</div>
+            <div class="card-body">
+              Data cleaning & EDA (Python)<br/>
+              Matplotlib & Seaborn visuals<br/>
+              Quantum algorithms with Qiskit
+            </div>
+            <div class="card-tags">
+              <span class="tag">Qiskit</span>
+              <span class="tag">EDA</span>
+              <span class="tag">DSA (Codetantra)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="section-heading">
+          <div class="eyebrow">Projects</div>
+          <div class="section-title">Selected work</div>
+          <p class="section-subtitle">
+            Projects that show how I think about security, UX, and real-world impact.
+          </p>
+        </div>
+
+        <div class="grid grid-2">
+          <!-- 1930 WhatsApp Chatbot -->
+          <article class="card">
+            <div class="card-title">WhatsApp Chatbot for Cyber Crime Helpline (1930)</div>
+            <div class="card-meta">Hackathon project · Node.js · MongoDB · UX-driven flows</div>
+            <div class="card-body">
+              Designed and developed a WhatsApp chatbot to help citizens report cyber financial
+              frauds quickly. The bot guides users step-by-step, captures structured complaint
+              data, and integrates with a backend dashboard for case tracking.
+            </div>
+            <div class="card-tags">
+              <span class="tag">WhatsApp Cloud API</span>
+              <span class="tag">Conversation UX</span>
+              <span class="tag">Secure Data Capture</span>
+            </div>
+            <div class="card-footer">
+              <span>Role: Flow design, Backend, Integration</span>
+              <span style="font-size:0.75rem; color:var(--muted);">Hackathon / 1930 support</span>
+            </div>
+          </article>
+
+          <!-- Vulnerability Management Tool -->
+          <article class="card">
+            <div class="card-title">Vulnerability Management Tool</div>
+            <div class="card-meta">Web app · Security dashboard</div>
+            <div class="card-body">
+              Built a tool using HTML, CSS, JavaScript and backend logic to track, prioritize,
+              and manage security vulnerabilities. Focused on clear status indicators, filters,
+              and action-oriented UI for remediation.
+            </div>
+            <div class="card-tags">
+              <span class="tag">Security</span>
+              <span class="tag">Risk Tracking</span>
+              <span class="tag">Web Interface</span>
+            </div>
+            <div class="card-footer">
+              <span>Role: Full-stack implementation</span>
+              <span></span>
+            </div>
+          </article>
+
+          <!-- Quantum Fourier Transform -->
+          <article class="card">
+            <div class="card-title">Quantum Fourier Transform (QFT)</div>
+            <div class="card-meta">Quantum computing · Qiskit</div>
+            <div class="card-body">
+              Implemented the Quantum Fourier Transform using Qiskit, converting quantum states
+              from computational to Fourier basis. Explored how QFT underpins key quantum
+              algorithms and experimented with small-scale circuits.
+            </div>
+            <div class="card-tags">
+              <span class="tag">QFT</span>
+              <span class="tag">Qiskit</span>
+              <span class="tag">Quantum Algorithms</span>
+            </div>
+            <div class="card-footer">
+              <span>Role: Research & implementation</span>
+              <span></span>
+            </div>
+          </article>
+
+          <!-- Data Cleaning & EDA -->
+          <article class="card">
+            <div class="card-title">Data Cleaning & Exploratory Data Analysis</div>
+            <div class="card-meta">Python · Matplotlib · Seaborn</div>
+            <div class="card-body">
+              Performed data cleaning and EDA to uncover trends such as age and gender
+              distributions. Built bar charts, histograms, and other visualizations to make
+              insights easier to understand.
+            </div>
+            <div class="card-tags">
+              <span class="tag">EDA</span>
+              <span class="tag">Visualization</span>
+              <span class="tag">Data Stories</span>
+            </div>
+            <div class="card-footer">
+              <span>Role: Data analyst & visualization</span>
+              <span></span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- PROCESS -->
+      <section id="process">
+        <div class="section-heading">
+          <div class="eyebrow">Process</div>
+          <div class="section-title">How I approach projects</div>
+          <p class="section-subtitle">
+            A consistent, security-aware and UX-driven way of working from idea to launch.
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <div class="card-title">1. Understand & Define</div>
+            <div class="card-body">
+              Clarify the problem, audience, and constraints. Map user journeys, security risks,
+              and success metrics before touching UI or code.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">2. Design & Prototype</div>
+            <div class="card-body">
+              Draft low-fi flows and layouts, then refine them into clear, guided experiences —
+              especially around forms, error states, and edge cases.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">3. Build & Iterate</div>
+            <div class="card-body">
+              Implement with clean, reusable components, test across devices, and improve based
+              on feedback, performance, and security checks.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <div class="section-heading">
+          <div class="eyebrow">Experience</div>
+          <div class="section-title">What I’ve done so far</div>
+          <p class="section-subtitle">
+            Internships, hackathons, and learning experiences that shaped my skills.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-role">Data Science Intern – Prodigy Infotech</div>
+            <div class="timeline-meta">1 month · Data analysis & visualization</div>
+            <div style="font-size:0.85rem; color:#e5e7eb;">
+              Worked on data-driven tasks involving cleaning, analysis, and visualization using
+              Python, strengthening my understanding of real-world datasets.
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-role">App Development Intern – Bharat Intern</div>
+            <div class="timeline-meta">1 month · App / web development</div>
+            <div style="font-size:0.85rem; color:#e5e7eb;">
+              Built and refined application features, focusing on reliability and simple user
+              journeys from screen to screen.
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-role">Developer – Cyber Crime Helpline 1930 Chatbot</div>
+            <div class="timeline-meta">Hackathon · WhatsApp chatbot & dashboard</div>
+            <div style="font-size:0.85rem; color:#e5e7eb;">
+              Built end-to-end WhatsApp chatbot workflows and supporting backend in a short
+              timeframe, focusing on secure data capture and clear guidance for complainants.
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-role">B.Tech CSE – Centurion University of Technology & Management</div>
+            <div class="timeline-meta">2022 – 2026 · 8.00 CGPA (contd.)</div>
+            <div style="font-size:0.85rem; color:#e5e7eb;">
+              Coursework and labs in computer science, programming, and emerging technologies
+              alongside projects in cybersecurity, data science, and quantum computing.
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-role">Certifications – IIT Bhubaneswar & Codetantra</div>
+            <div class="timeline-meta">Data Science · Ethical Hacking · DSA</div>
+            <div style="font-size:0.85rem; color:#e5e7eb;">
+              Completed certificates in Data Science and Ethical Hacking (IIT Bhubaneswar) and
+              Data Structures & Algorithms (Codetantra), strengthening both security and core CS
+              fundamentals.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="section-heading">
+          <div class="eyebrow">Contact</div>
+          <div class="section-title">Let’s work together</div>
+          <p class="section-subtitle">
+            Open to roles where I can build secure, user-friendly products.
+          </p>
+        </div>
+
+        <div class="contact">
+          <form>
+            <div>
+              <label>
+                Name
+                <input type="text" placeholder="Your name" />
+              </label>
+            </div>
+            <div>
+              <label>
+                Email
+                <input type="email" placeholder="you@example.com" />
+              </label>
+            </div>
+            <div>
+              <label>
+                Message
+                <textarea rows="4" placeholder="Tell me a bit about the opportunity"></textarea>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+
+          <div>
+            <p style="font-size:0.9rem; color:#e5e7eb; margin-bottom:12px;">
+              Prefer email or socials?
+            </p>
+            <div class="badges">
+              <span class="tag">Email: manmohakprusty1111@gmail.com</span>
+              <span class="tag">GitHub: github.com/Manmohakprusty</span>
+              <span class="tag">LinkedIn: linkedin.com/in/manmohak-prusty-b84049237</span>
+              <span class="tag">Resume: View on Google Drive</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Manmohak Prusty. Built with a focus on security, UX, and clean code.
+    </footer>
+  </div>
+
+  <script>
+    // Just update year automatically
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
